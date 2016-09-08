@@ -95,6 +95,9 @@
                                            type:TSMessageNotificationTypeMessage
                                        duration:TSMessageNotificationDurationAutomatic
                                        callback:nil
+                                   dissCallback:^{
+                                       NSLog(@"dissCallback");
+                                    }
                                     buttonTitle:nil
                                  buttonCallback:nil
                                      atPosition:TSMessageNotificationPositionTop

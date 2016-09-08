@@ -52,6 +52,7 @@ static NSMutableDictionary *_notificationDesign;
 @property (copy) void (^callback)();
 @property (copy) void (^buttonCallback)();
 
+
 - (CGFloat)updateHeightOfMessageView;
 - (void)layoutSubviews;
 

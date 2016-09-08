@@ -143,6 +143,36 @@ __weak static UIViewController *_defaultViewController;
                                              buttonCallback:buttonCallback
                                                  atPosition:messagePosition
                                        canBeDismissedByUser:dismissingEnabled];
+    v.dissCallback=callback;
+    [self prepareNotificationToBeShown:v];
+}
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                                   image:(UIImage *)image
+                                    type:(TSMessageNotificationType)type
+                                duration:(NSTimeInterval)duration
+                                callback:(void (^)())callback
+                            dissCallback:(void (^)())dissCallback
+                             buttonTitle:(NSString *)buttonTitle
+                          buttonCallback:(void (^)())buttonCallback
+                              atPosition:(TSMessageNotificationPosition)messagePosition
+                    canBeDismissedByUser:(BOOL)dismissingEnabled;
+{
+    // Create the TSMessageView
+    
+    TSMessageView *v = [[TSMessageView alloc] initWithTitle:title
+                                                   subtitle:subtitle
+                                                      image:image
+                                                       type:type
+                                                   duration:duration
+                                           inViewController:viewController
+                                                   callback:callback
+                                                buttonTitle:buttonTitle
+                                             buttonCallback:buttonCallback
+                                                 atPosition:messagePosition
+                                       canBeDismissedByUser:dismissingEnabled];
+    v.dissCallback=dissCallback;
     [self prepareNotificationToBeShown:v];
 }
 
@@ -367,7 +397,9 @@ __weak static UIViewController *_defaultViewController;
          {
              [self fadeInCurrentNotification];
          }
-         
+         if (currentView.dissCallback!=nil) {
+             currentView.dissCallback();
+         }
          if(animationFinished) {
              animationFinished();
          }

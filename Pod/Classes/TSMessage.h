@@ -157,6 +157,22 @@ typedef NS_ENUM(NSInteger,TSMessageNotificationDuration) {
                               atPosition:(TSMessageNotificationPosition)messagePosition
                     canBeDismissedByUser:(BOOL)dismissingEnabled;
 
+
++ (void)showNotificationInViewController:(UIViewController *)viewController
+                                   title:(NSString *)title
+                                subtitle:(NSString *)subtitle
+                                   image:(UIImage *)image
+                                    type:(TSMessageNotificationType)type
+                                duration:(NSTimeInterval)duration
+                                callback:(void (^)())callback
+                                dissCallback:(void (^)())dissCallback
+                             buttonTitle:(NSString *)buttonTitle
+                          buttonCallback:(void (^)())buttonCallback
+                              atPosition:(TSMessageNotificationPosition)messagePosition
+                    canBeDismissedByUser:(BOOL)dismissingEnabled;
+
+
+
 /** Fades out the currently displayed notification. If another notification is in the queue,
  the next one will be displayed automatically
  @return YES if the currently displayed notification was successfully dismissed. NO if no notification
